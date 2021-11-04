@@ -3,7 +3,7 @@ export default {
   black: 'black', // '#000'
   main: '#3F51B5',
   secondary: '#F50057',
-  darkGrey: '#a4a4a4',
+  darkGrey: '#757575',
   mediumGrey: '#c4c4c4',
-  lightGrey: '#ebebeb',
+  lightGrey: '#e0e0e0',
 };
