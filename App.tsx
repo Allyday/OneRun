@@ -1,18 +1,22 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-import { AllRunsScreen, GetInfoScreen } from './src/screens';
+import AppRouter from './src/AppRouter';
+import { Colors } from './src/constants';
 
-const Stack = createNativeStackNavigator();
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: Colors.main,
+    accent: Colors.secondary,
+  },
+};
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="GetInfo" component={GetInfoScreen} />
-        <Stack.Screen name="AllRuns" component={AllRunsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <AppRouter />
+    </PaperProvider>
   );
 }

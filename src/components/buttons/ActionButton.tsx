@@ -1,59 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import { Button } from 'react-native-paper';
 
-import { TouchableWrapper } from '../containers';
-import { Colors } from '../../constants';
+import { HORIZONTAL_PADDING, WINDOW_WIDTH } from '../../constants';
 
-interface ActionButtonProps {
-  title: string;
-  onPress: () => any,
-  error?: string;
-  style?: any;
-  containerStyle?: any;
-  disabled?: boolean;
-}
-
-const ActionButton = ({ title, style, containerStyle, error, onPress, disabled }: ActionButtonProps) => {
+const ActionButton = (props: any) => {
   return (
-    <KeyboardAvoidingView behavior="padding" style={{ width: '100%', ...containerStyle }}>
-      <TouchableWrapper
-        style={{ ...styles.container, ...style }}
-        onPress={onPress}
-        disabled={disabled}
-        disabledBgColor={Colors.lightGrey}
-      >
-        {disabled ?
-          <Text style={{
-            ...styles.title,
-            color: Colors.mediumGrey,
-          }}>{title.toUpperCase()}</Text>
-          :
-          <Text style={styles.title}>{title.toUpperCase()}</Text>
-        }
-      </TouchableWrapper>
-      {error && <Text style={styles.errorText}>{error}</Text>}
-    </KeyboardAvoidingView>
+    <Button mode="contained" theme={{ roundness: 4 }}  {...props} style={styles.button}>
+      {props.title.toUpperCase()}
+    </Button>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.main,
-    borderRadius: 4,
-    paddingVertical: 10,
-    marginVertical: 20,
-    marginHorizontal: 24,
-  },
-  title: {
-    fontWeight: '500',
-    lineHeight: 16,
-    color: Colors.white,
-  },
-  errorText: {
-    color: Colors.firebrick,
-    paddingLeft: 24,
+  button: {
+    width: WINDOW_WIDTH - 2 * HORIZONTAL_PADDING,
   },
 });
 

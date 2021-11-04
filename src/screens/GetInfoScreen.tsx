@@ -2,16 +2,20 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { ActionButton, TouchableWrapper } from '../components';
+import { ActionButton } from '../components';
 import { RootStackParamList } from '../navigation';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'GetInfo'>;
+type GetInfoProps = NativeStackScreenProps<RootStackParamList, 'GetInfo'>;
 
-const GetInfoScreen = ({ navigation }: Props) => {
+const GetInfoScreen = ({ navigation }: GetInfoProps) => {
+  const onPressConfirmNames = () => {
+    navigation.navigate('AllRuns');
+  };
+
   return (
     <View style={styles.container}>
       <Text>This is get info screen!</Text>
-      <ActionButton title="next" onPress={() => navigation.navigate('AllRuns')} />
+      <ActionButton title="next" onPress={onPressConfirmNames} />
     </View>
   );
 }
