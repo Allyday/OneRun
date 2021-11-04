@@ -19,8 +19,6 @@ const GetInfoScreen = ({ navigation }: GetInfoProps) => {
   const onPressConfirmNames = () => {
     const user = { firstName, lastName };
     dispatch(setUser(user));
-
-    navigation.navigate('AllRuns');
   };
 
   return (
