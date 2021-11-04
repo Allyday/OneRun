@@ -1,12 +1,20 @@
 import React from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { HORIZONTAL_PADDING, WINDOW_WIDTH } from '../../constants';
 
 const ActionButton = (props: any) => {
   return (
-    <Button mode="contained" theme={{ roundness: 4 }}  {...props} style={styles.button}>
+    <Button
+      mode="contained"
+      theme={{ roundness: 4 }}
+      {...props}
+      style={{
+        ...styles.button,
+        ...props.style,
+      }}
+    >
       {props.title.toUpperCase()}
     </Button>
   );
@@ -15,6 +23,7 @@ const ActionButton = (props: any) => {
 const styles = StyleSheet.create({
   button: {
     width: WINDOW_WIDTH - 2 * HORIZONTAL_PADDING,
+    marginVertical: 30,
   },
 });
 

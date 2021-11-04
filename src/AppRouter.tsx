@@ -10,7 +10,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="GetInfo" component={GetInfoScreen} />
+        <Stack.Screen
+          name="GetInfo"
+          component={GetInfoScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="AllRuns" component={AllRunsScreen} />
       </Stack.Navigator>
     </NavigationContainer>

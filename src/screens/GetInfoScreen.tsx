@@ -1,31 +1,56 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { ActionButton } from '../components';
+import { ActionButton, Screen } from '../components';
 import { RootStackParamList } from '../navigation';
+import { Colors, Styles, WINDOW_HEIGHT } from '../constants';
 
 type GetInfoProps = NativeStackScreenProps<RootStackParamList, 'GetInfo'>;
 
 const GetInfoScreen = ({ navigation }: GetInfoProps) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
   const onPressConfirmNames = () => {
     navigation.navigate('AllRuns');
   };
 
   return (
-    <View style={styles.container}>
-      <Text>This is get info screen!</Text>
-      <ActionButton title="next" onPress={onPressConfirmNames} />
-    </View>
+    <Screen>
+      <View style={styles.bodyContainer}>
+        <Text style={styles.questionText}>How do we address you?</Text>
+        <TextInput
+          placeholder="First name"
+          value={firstName}
+          onChangeText={text => setFirstName(text)}
+          style={Styles.textInput}
+          placeholderTextColor={Colors.darkGrey}
+        />
+        <TextInput
+          placeholder="Last name"
+          value={lastName}
+          onChangeText={text => setLastName(text)}
+          style={Styles.textInput}
+          placeholderTextColor={Colors.darkGrey}
+        />
+      </View>
+      <ActionButton
+        title="next" onPress={onPressConfirmNames}
+        disabled={!firstName.length || !lastName.length}
+      />
+    </Screen>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  bodyContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: WINDOW_HEIGHT * 0.2,
+  },
+  questionText: {
+    fontSize: 17,
+    fontWeight: '500',
   },
 });
 
