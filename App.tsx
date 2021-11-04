@@ -1,7 +1,9 @@
 import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import AppRouter from './src/AppRouter';
+import { store } from './src/redux/store';
 import { Colors } from './src/constants';
 
 const theme = {
@@ -15,8 +17,10 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <AppRouter />
-    </PaperProvider>
+    <ReduxProvider store={store}>
+      <PaperProvider theme={theme}>
+        <AppRouter />
+      </PaperProvider>
+    </ReduxProvider>
   );
 }

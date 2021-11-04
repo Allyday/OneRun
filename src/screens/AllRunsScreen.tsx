@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useAppSelector } from '../redux/hooks';
 
-export default function AllRunsScreen() {
+const AllRunsScreen = () => {
+  const { user } = useAppSelector(state => state.auth);
+
   return (
     <View style={styles.container}>
-      <Text>This is all runs screen!</Text>
+      <Text>{user?.firstName}, {user?.lastName}</Text>
     </View>
   );
 }
@@ -17,3 +20,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default AllRunsScreen;

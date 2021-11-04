@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch } from '../redux/hooks';
 
 import { ActionButton, Screen } from '../components';
 import { RootStackParamList } from '../navigation';
 import { Colors, Styles, WINDOW_HEIGHT } from '../constants';
+import { setUser } from '../slices/authSlice';
 
 type GetInfoProps = NativeStackScreenProps<RootStackParamList, 'GetInfo'>;
 
@@ -12,7 +14,12 @@ const GetInfoScreen = ({ navigation }: GetInfoProps) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
+  const dispatch = useAppDispatch();
+
   const onPressConfirmNames = () => {
+    const user = { firstName, lastName };
+    dispatch(setUser(user));
+
     navigation.navigate('AllRuns');
   };
 
