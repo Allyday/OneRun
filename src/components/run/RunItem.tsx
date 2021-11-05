@@ -5,6 +5,7 @@ import { IconButton } from 'react-native-paper';
 
 import { Colors, HORIZONTAL_PADDING } from '../../constants';
 import { Run } from '../../models';
+import { getTimeString } from '../../utils';
 
 const RunItem = ({ item, onEdit }: { item: Run, onEdit: () => void }) => {
   return (
@@ -13,7 +14,7 @@ const RunItem = ({ item, onEdit }: { item: Run, onEdit: () => void }) => {
         <Text style={styles.runDistance}>{item.distance} km</Text>
         <View style={styles.rowContainer}>
           <MaterialCommunityIcons name="clock-outline" size={14} color={Colors.darkGrey} />
-          <Text style={styles.runTime}>{item.time}</Text>
+          <Text style={styles.runTime}>{getTimeString(item.time)}</Text>
         </View>
       </View>
       <IconButton

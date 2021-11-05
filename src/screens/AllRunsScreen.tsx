@@ -15,7 +15,7 @@ const AllRunsScreen = ({ navigation }: AllRunsProps) => {
   const { user } = useAppSelector(state => state.auth);
 
   const runs: Run[] = [
-    { id: '1', distance: 9, time: '9:45 AM' },
+    { id: '1', distance: 9, time: new Date() },
   ];
 
   const _renderRunItem: ListRenderItem<Run> = ({ item }) => {
