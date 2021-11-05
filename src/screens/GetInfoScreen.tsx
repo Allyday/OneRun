@@ -6,7 +6,7 @@ import { useAppDispatch } from '../redux/hooks';
 import { ActionButton, Screen } from '../components';
 import { RootStackParamList } from '../navigation';
 import { Colors, Styles, WINDOW_HEIGHT } from '../constants';
-import { setUser } from '../slices/authSlice';
+import { setUserThunk } from '../slices/authSlice';
 
 type GetInfoProps = NativeStackScreenProps<RootStackParamList, 'GetInfo'>;
 
@@ -18,7 +18,7 @@ const GetInfoScreen = ({ navigation }: GetInfoProps) => {
 
   const onPressConfirmNames = () => {
     const user = { firstName, lastName };
-    dispatch(setUser(user));
+    dispatch(setUserThunk(user));
   };
 
   return (

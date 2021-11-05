@@ -1,4 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Storage } from '../constants';
 
 import { User } from '../models';
 
@@ -19,6 +21,13 @@ export const authSlice = createSlice({
     },
   },
 });
+
+export const setUserThunk = (user: User) => {
+  return async (dispatch: (arg0: any) => void, getState: any) => {
+    dispatch(setUser(user));
+    await AsyncStorage.setItem(Storage.user, JSON.stringify(user));
+  };
+};
 
 export const { setUser } = authSlice.actions;
 
