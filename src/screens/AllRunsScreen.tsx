@@ -13,10 +13,7 @@ type AllRunsProps = NativeStackScreenProps<RootStackParamList, 'AllRuns'>;
 
 const AllRunsScreen = ({ navigation }: AllRunsProps) => {
   const { user } = useAppSelector(state => state.auth);
-
-  const runs: Run[] = [
-    { id: '1', distance: 9, time: new Date() },
-  ];
+  const { runs } = useAppSelector(state => state.run);
 
   const _renderRunItem: ListRenderItem<Run> = ({ item }) => {
     const onEditItem = () => {

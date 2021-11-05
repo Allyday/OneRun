@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Platform, TouchableWithoutFeedback } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch } from '../redux/hooks';
 
 import { ActionButton, Screen } from '../components';
 import { RootStackParamList } from '../navigation';
 import { getTimeString } from '../utils';
 import { Colors, Styles, WINDOW_HEIGHT } from '../constants';
+import { addRunThunk } from '../slices/runSlice';
 
 type RunDetailsProps = NativeStackScreenProps<RootStackParamList, 'RunDetails'>;
 
@@ -14,6 +16,8 @@ const RunDetailsScreen = ({ navigation }: RunDetailsProps) => {
   const [distance, setDistance] = useState('');
   const [time, setTime] = useState();
   const [show, setShow] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const onChangeDistance = (text: string) => {
     if (!Number.isNaN(+text)) setDistance(text);
@@ -30,6 +34,7 @@ const RunDetailsScreen = ({ navigation }: RunDetailsProps) => {
   };
 
   const onPressSave = () => {
+    if (time) dispatch(addRunThunk(+distance, time));
     navigation.pop();
   };
 
