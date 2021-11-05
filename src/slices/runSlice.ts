@@ -6,12 +6,10 @@ import { Run } from '../models';
 
 export interface RunState {
   runs: Run[],
-  current: Run | null;
 };
 
 const initialState: RunState = {
   runs: [],
-  current: null,
 };
 
 export const runSlice = createSlice({
@@ -24,8 +22,14 @@ export const runSlice = createSlice({
     addRun: (state, action: PayloadAction<Run>) => {
       state.runs.push(action.payload);
     },
-    setCurrentRun: (state, action: PayloadAction<Run | null>) => {
-      state.current = action.payload;
+    editRun: (state, action: PayloadAction<Run>) => {
+      const editedRun = action.payload;
+      const editedIndex = state.runs.findIndex((run => run.id === editedRun.id));
+      state.runs[editedIndex] = editedRun;
+    },
+    deleteRunById: (state, action: PayloadAction<string>) => {
+      const deletedIndex = state.runs.findIndex((run => run.id === action.payload));
+      state.runs.splice(deletedIndex, 1);
     },
   },
 });
@@ -45,6 +49,22 @@ export const addRunThunk = (distance: number, time: Date) => {
   }
 };
 
-export const { setRuns, addRun, setCurrentRun } = runSlice.actions;
+export const editRunThunk = (editedRun: Run) => {
+  return async (dispatch: (arg0: any) => void, getState: any) => {
+    const { runs } = getState().run;
+    dispatch(editRun(editedRun));
+    await AsyncStorage.setItem(Storage.runs, JSON.stringify(runs));
+  };
+};
+
+export const deleteRunByIdThunk = (id: string) => {
+  return async (dispatch: (arg0: any) => void, getState: any) => {
+    const { runs } = getState().run;
+    dispatch(deleteRunById(id));
+    await AsyncStorage.setItem(Storage.runs, JSON.stringify(runs));
+  };
+};
+
+export const { setRuns, addRun, editRun, deleteRunById } = runSlice.actions;
 
 export default runSlice.reducer;

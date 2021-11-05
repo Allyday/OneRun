@@ -1,7 +1,7 @@
 type RootStackParamList = {
   GetInfo: undefined,
   AllRuns: undefined,
-  RunDetails: undefined,
+  RunDetails: { editedItemId: string } | undefined,
 };
 
 export default RootStackParamList;

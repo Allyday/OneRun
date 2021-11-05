@@ -17,7 +17,7 @@ const AllRunsScreen = ({ navigation }: AllRunsProps) => {
 
   const _renderRunItem: ListRenderItem<Run> = ({ item }) => {
     const onEditItem = () => {
-      navigation.navigate('RunDetails');
+      navigation.navigate('RunDetails', { editedItemId: item.id });
     };
 
     return <RunItem item={item} key={item.id} onEdit={onEditItem} />;
